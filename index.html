@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script defer src="/_vercel/insights/script.js"></script>
         <title>Cat or Dog</title>
         <meta
             name="description"
@@ -265,8 +266,7 @@
             const status = document.getElementById("status");
             const result = document.getElementById("result");
 
-            // CHANGED: Use relative path - works when HTML is served from Next.js
-            // This avoids CORS issues since it's same-origin
+            // Change this to your API endpoint
             const API_ENDPOINT = "https://cartersusi.com/api/predict";
 
             let selectedFile = null;
@@ -332,16 +332,8 @@
                         body: formData,
                     });
 
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(
-                            errorData.error ||
-                                `HTTP error! status: ${response.status}`,
-                        );
-                    }
-
                     const data = await response.json();
-                    console.log("Response:", data);
+                    console.log(data);
 
                     if (data.error) {
                         throw new Error(data.error);
